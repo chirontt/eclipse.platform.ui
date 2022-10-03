@@ -213,7 +213,7 @@
          version="0.0.0"
          unpack="false"/>
 
-   <plugin
+   <!-- plugin
          id="org.eclipse.e4.ui.workbench.renderers.swt.cocoa"
          os="macosx"
          ws="cocoa"
@@ -221,7 +221,7 @@
          install-size="0"
          version="0.0.0"
          fragment="true"
-         unpack="false"/>
+         unpack="false"/ -->
 
    <plugin
          id="org.eclipse.equinox.common"
@@ -378,7 +378,7 @@
          version="0.0.0"
          unpack="false"/>
 
-   <plugin
+   <!-- plugin
          id="org.eclipse.equinox.launcher.cocoa.macosx.x86_64"
          os="macosx"
          ws="cocoa"
@@ -426,7 +426,7 @@
          download-size="0"
          install-size="0"
          version="0.0.0"
-         fragment="true"/>
+         fragment="true"/ -->
 
    <plugin
          id="org.eclipse.equinox.launcher.win32.win32.aarch64"
@@ -438,7 +438,7 @@
          version="0.0.0"
          fragment="true"/>
 
-   <plugin
+   <!-- plugin
          id="org.eclipse.equinox.launcher.win32.win32.x86_64"
          os="win32"
          ws="win32"
@@ -446,7 +446,7 @@
          download-size="0"
          install-size="0"
          version="0.0.0"
-         fragment="true"/>
+         fragment="true"/ -->
 
    <plugin
          id="org.eclipse.swt"
@@ -466,7 +466,7 @@
          fragment="true"
          unpack="false"/>
 
-   <plugin
+   <!-- plugin
          id="org.eclipse.swt.win32.win32.x86_64"
          os="win32"
          ws="win32"
@@ -530,7 +530,7 @@
          install-size="0"
          version="0.0.0"
          fragment="true"
-         unpack="false"/>
+         unpack="false"/ -->
 
    <plugin
          id="org.eclipse.jface"
@@ -595,12 +595,12 @@
          version="0.0.0"
          unpack="false"/>
 
-   <plugin
+   <!-- plugin
          id="org.eclipse.e4.ui.dialogs"
          download-size="0"
          install-size="0"
          version="0.0.0"
-         unpack="false"/>
+         unpack="false"/ -->
 
    <plugin
          id="org.eclipse.e4.ui.dialogs"
@@ -630,14 +630,14 @@
          version="0.0.0"
          unpack="false"/>
 
-   <plugin
+   <!-- plugin
          id="org.eclipse.e4.ui.swt.gtk"
          ws="gtk"
          download-size="0"
          install-size="0"
          version="0.0.0"
          fragment="true"
-         unpack="false"/>
+         unpack="false"/ -->
 
    <plugin
          id="org.eclipse.e4.ui.swt.win32"
