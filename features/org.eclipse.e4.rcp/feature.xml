@@ -2,7 +2,7 @@
 <feature
       id="org.eclipse.e4.rcp"
       label="%featureName"
-      version="4.26.0.qualifier"
+      version="4.27.0.qualifier"
       provider-name="%providerName"
       license-feature="org.eclipse.license"
       license-feature-version="0.0.0">
@@ -453,6 +453,17 @@
          download-size="0"
          install-size="0"
          version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipse.swt.win32.win32.aarch64"
+         os="win32"
+         ws="win32"
+         arch="aarch64"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         fragment="true"
          unpack="false"/>
 
    <plugin

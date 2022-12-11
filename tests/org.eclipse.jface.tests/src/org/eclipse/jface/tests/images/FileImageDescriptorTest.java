@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008, 2020 IBM Corporation and others.
+ * Copyright (c) 2008, 2022 IBM Corporation and others.
  *
  * This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License 2.0
@@ -13,7 +13,7 @@
  *     Karsten Stoeckmann <ngc2997@gmx.net> - Test case for Bug 220766
  *     		[JFace] ImageRegistry.get does not work as expected (crashes with NullPointerException)
  *     Christoph Läubrich - Bug 567898 - [JFace][HiDPI] ImageDescriptor support alternative naming scheme for high dpi
- *     Daniel Kruegler - #375, #378
+ *     Daniel Kruegler - #375, #378, #396, #398, #399, #401
  ******************************************************************************/
 
 package org.eclipse.jface.tests.images;
@@ -24,11 +24,13 @@ import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.Iterator;
 
+import org.eclipse.core.runtime.Adapters;
 import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.graphics.ImageData;
+import org.eclipse.swt.graphics.ImageFileNameProvider;
 import org.osgi.framework.Bundle;
 import org.osgi.framework.FrameworkUtil;
 
@@ -172,6 +174,67 @@ public class FileImageDescriptorTest extends TestCase {
 		assertNotNull(imageDataZoomed);
 		assertEquals(Math.round(imageData.width * 1.5), imageDataZoomed.width);
 		assertEquals(Math.round(imageData.height * 1.5), imageDataZoomed.height);
+	}
+
+	public void testImageFileNameProviderGetxPath() {
+		ImageDescriptor descriptor = ImageDescriptor.createFromFile(FileImageDescriptorTest.class,
+				"/icons/imagetests/rectangular-57x16.png");
+		ImageFileNameProvider fileNameProvider = Adapters.adapt(descriptor, ImageFileNameProvider.class);
+		assertNotNull("FileImageDescriptor does not adapt to ImageFileNameProvider", fileNameProvider);
+		ImageFileNameProvider fileNameProvider2nd = Adapters.adapt(descriptor, ImageFileNameProvider.class);
+		assertSame("FileImageDescriptor does not return unique ImageFileNameProvider", fileNameProvider,
+				fileNameProvider2nd);
+		String imagePath100 = fileNameProvider.getImagePath(100);
+		assertNotNull("FileImageDescriptor's ImageFileNameProvider does not return the 100% path", imagePath100);
+		assertEquals(Path.fromOSString(imagePath100).lastSegment(), "rectangular-57x16.png");
+		String imagePath200 = fileNameProvider.getImagePath(200);
+		assertNotNull("FileImageDescriptor's ImageFileNameProvider does not return the 200% path", imagePath200);
+		assertEquals(Path.fromOSString(imagePath200).lastSegment(), "rectangular-114x32.png");
+		String imagePath150 = fileNameProvider.getImagePath(150);
+		assertNotNull("FileImageDescriptor's ImageFileNameProvider does not return the 150% path", imagePath150);
+		assertEquals(Path.fromOSString(imagePath150).lastSegment(), "rectangular-86x24.png");
+		String imagePath250 = fileNameProvider.getImagePath(250);
+		assertNull("FileImageDescriptor's ImageFileNameProvider does return a 250% path", imagePath250);
+	}
+
+	public void testImageFileNameProviderGetxName() {
+		ImageDescriptor descriptor = ImageDescriptor.createFromFile(FileImageDescriptorTest.class,
+				"/icons/imagetests/zoomIn.png");
+		ImageFileNameProvider fileNameProvider = Adapters.adapt(descriptor, ImageFileNameProvider.class);
+		assertNotNull("FileImageDescriptor does not adapt to ImageFileNameProvider", fileNameProvider);
+		String imagePath100 = fileNameProvider.getImagePath(100);
+		assertNotNull("FileImageDescriptor's ImageFileNameProvider does not return the 100% path", imagePath100);
+		assertEquals(Path.fromOSString(imagePath100).lastSegment(), "zoomIn.png");
+		String imagePath200 = fileNameProvider.getImagePath(200);
+		assertNotNull("FileImageDescriptor's ImageFileNameProvider does not return the @2x path", imagePath200);
+		assertEquals(Path.fromOSString(imagePath200).lastSegment(), "zoomIn@2x.png");
+		String imagePath150 = fileNameProvider.getImagePath(150);
+		assertNull("FileImageDescriptor's ImageFileNameProvider does return a @1.5x path", imagePath150);
+	}
+
+	public void testAdaptToURL() {
+		ImageDescriptor descriptor = ImageDescriptor.createFromFile(FileImageDescriptorTest.class,
+				"/icons/imagetests/rectangular-57x16.png");
+
+		URL url = Adapters.adapt(descriptor, URL.class);
+		assertNotNull("FileImageDescriptor does not adapt to URL", url);
+
+		ImageDescriptor descriptorFromUrl = ImageDescriptor.createFromURL(url);
+
+		ImageData imageDataOrig = descriptor.getImageData(100);
+		assertNotNull("Original URL does not return 100% image data", imageDataOrig);
+
+		ImageData imageDataURL = descriptorFromUrl.getImageData(100);
+		assertNotNull("Adapted URL does not return 100% image data", imageDataURL);
+		assertEquals(imageDataOrig.width, imageDataURL.width);
+		assertEquals(imageDataOrig.height, imageDataURL.height);
+
+		ImageData imageDataOrig200 = descriptor.getImageData(200);
+		assertNotNull("Original URL does not return 200% image data", imageDataOrig200);
+
+		ImageData imageDataURL200 = descriptorFromUrl.getImageData(200);
+		assertEquals(imageDataOrig200.width, imageDataURL200.width);
+		assertEquals(imageDataOrig200.height, imageDataURL200.height);
 	}
 
 }
