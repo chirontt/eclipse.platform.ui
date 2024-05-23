@@ -6,6 +6,8 @@ Bundle-Version: 3.13.500.qualifier
 Bundle-Vendor: %Plugin.providerName
 Bundle-Localization: plugin
 Export-Package: 
+ org.eclipse.jface.internal.text,
+ org.eclipse.jface.internal.text.contentassist,
  org.eclipse.jface.text.tests,
  org.eclipse.jface.text.tests.codemining,
  org.eclipse.jface.text.tests.contentassist,
@@ -22,7 +24,10 @@ Require-Bundle:
  org.eclipse.text.tests;bundle-version="[3.5.0,4.0.0)",
  org.eclipse.core.runtime;bundle-version="[3.29.0,4.0.0)",
  org.eclipse.ui.workbench.texteditor,
- org.eclipse.test.performance;bundle-version="3.13.0"
+ org.eclipse.test.performance;bundle-version="3.13.0",
+ org.mockito.mockito-core;bundle-version="5.11.0",
+ net.bytebuddy.byte-buddy;bundle-version="1.14.13",
+ net.bytebuddy.byte-buddy-agent;bundle-version="1.14.13"
 Bundle-RequiredExecutionEnvironment: JavaSE-17
 Eclipse-BundleShape: dir
 Automatic-Module-Name: org.eclipse.jface.text.tests
