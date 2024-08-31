@@ -10,6 +10,7 @@
  *
  * Contributors:
  *     IBM Corporation - initial API and implementation
+ *     Tue Ton - support for FreeBSD
  *******************************************************************************/
 package org.eclipse.ui.internal.themes;
 
@@ -182,7 +183,7 @@ public class WorkbenchThemeManager extends EventManager implements IThemeManager
 	private void updateThemes() {
 		// This code was added to fix a windows specific issue, see Bug 19229
 		// However, it's causing issues on Linux, see Bug 563001
-		if (Util.isLinux()) {
+		if (Util.isLinux() || Util.isFreeBSD()) {
 			return;
 		}
 
