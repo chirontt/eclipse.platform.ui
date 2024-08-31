@@ -1151,7 +1151,7 @@ class FindReplaceDialog extends Dialog {
 			fFindField.removeModifyListener(fFindModifyListener);
 
 			// XXX: Workaround for Combo bug on Linux (see bug 404202 and bug 410603)
-			if (Util.isLinux()) {
+			if (Util.isLinux() || Util.isFreeBSD()) {
 				fFindModifyListener.ignoreNextEvent();
 			}
 
@@ -1168,7 +1168,7 @@ class FindReplaceDialog extends Dialog {
 			fReplaceField.removeModifyListener(fReplaceModifyListener);
 
 			// XXX: Workaround for Combo bug on Linux (see bug 404202 and bug 410603)
-			if (Util.isLinux()) {
+			if (Util.isLinux() || Util.isFreeBSD()) {
 				fReplaceModifyListener.ignoreNextEvent();
 			}
 
