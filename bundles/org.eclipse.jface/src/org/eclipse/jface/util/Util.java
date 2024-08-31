@@ -564,6 +564,16 @@ public final class Util {
 
 	/**
 	 * Common WS query helper method.
+	 * @return <code>true</code> for FreeBSD platform
+	 * @since 3.5
+	 */
+	public static boolean isFreeBSD() {
+		final String ws = SWT.getPlatform();
+		return WS_GTK.equals(ws);
+	}
+
+	/**
+	 * Common WS query helper method.
 	 * @return <code>true</code> for linux platform
 	 * @since 3.5
 	 */
