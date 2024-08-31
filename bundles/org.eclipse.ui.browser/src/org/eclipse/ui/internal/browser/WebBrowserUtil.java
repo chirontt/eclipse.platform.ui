@@ -76,6 +76,18 @@ public class WebBrowserUtil {
 	}
 
 	/**
+	 * Returns true if we're running on FreeBSD.
+	 *
+	 * @return boolean
+	 */
+	public static boolean isFreeBSD() {
+		String os = System.getProperty("os.name"); //$NON-NLS-1$
+		if (os != null && os.toLowerCase().contains("freebsd")) //$NON-NLS-1$
+			return true;
+		return false;
+	}
+
+	/**
 	 * Open a dialog window.
 	 *
 	 * @param message

@@ -294,7 +294,7 @@ public class BrowserInformationControl extends AbstractInformationControl implem
 
 		String scrollbarStyle= "overflow:scroll;"; //$NON-NLS-1$
 		// workaround for bug 546870, don't use a horizontal scrollbar on Linux as its broken for GTK3 and WebKit
-		if (Util.isLinux()) {
+		if (Util.isLinux() || Util.isFreeBSD()) {
 			scrollbarStyle= "word-wrap:break-word;"; //$NON-NLS-1$
 		}
 		// The default "overflow:auto" would not result in a predictable width for the client area

@@ -97,7 +97,7 @@ public class ShowInSystemExplorerHandler extends AbstractHandler {
 
 				File dir = item.getWorkspace().getRoot().getLocation().toFile();
 				Process p;
-				if (Util.isLinux() || Util.isMac()) {
+				if (Util.isLinux() || Util.isMac() || Util.isFreeBSD()) {
 					p = Runtime.getRuntime().exec(new String[] { "/bin/sh", "-c", launchCmd }, null, dir); //$NON-NLS-1$ //$NON-NLS-2$
 				} else {
 					p = Runtime.getRuntime().exec(launchCmd, null, dir);
@@ -180,7 +180,7 @@ public class ShowInSystemExplorerHandler extends AbstractHandler {
 	}
 
 	private String quotePath(String path) {
-		if (Util.isLinux() || Util.isMac()) {
+		if (Util.isLinux() || Util.isMac() || Util.isFreeBSD()) {
 			// Quote for usage inside "", man sh, topic QUOTING:
 			path = path.replaceAll("[\"$`]", "\\\\$0"); //$NON-NLS-1$ //$NON-NLS-2$
 		}
