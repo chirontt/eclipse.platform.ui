@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2018 SAP SE and others.
+ * Copyright (c) 2018, 2026 SAP SE and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -7,6 +7,7 @@
  *
  * Contributors:
  *     SAP SE - initial version
+ *     Tue Ton - support for FreeBSD
  *******************************************************************************/
 package org.eclipse.urischeme.internal.registration;
 
@@ -29,7 +30,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-public class TestUnitRegistrationLinux {
+public class TestUnitRegistrationUnix {
 
 	private static final String PRODUCT_NAME = "myProduct";
 	private static final String USER_HOME = System.getProperty("user.home");
@@ -65,7 +66,7 @@ public class TestUnitRegistrationLinux {
 		System.setProperty(ECLIPSE_HOME_LOCATION, "file:/home/myuser/Eclipse/");
 		System.setProperty(ECLIPSE_LAUNCHER, "/home/myuser/Eclipse/Eclipse");
 
-		registration = new RegistrationLinux(fileProvider, processStub, PRODUCT_NAME);
+		registration = new RegistrationUnix(fileProvider, processStub, PRODUCT_NAME);
 	}
 
 	@BeforeAll
