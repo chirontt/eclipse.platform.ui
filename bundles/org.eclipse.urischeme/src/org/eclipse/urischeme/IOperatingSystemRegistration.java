@@ -14,13 +14,13 @@ import java.util.Collection;
 import java.util.List;
 
 import org.eclipse.core.runtime.Platform;
-import org.eclipse.urischeme.internal.registration.RegistrationLinux;
 import org.eclipse.urischeme.internal.registration.RegistrationMacOsX;
+import org.eclipse.urischeme.internal.registration.RegistrationUnix;
 import org.eclipse.urischeme.internal.registration.RegistrationWindows;
 
 /**
  * Interface for registration or uri schemes in the different operating systems
- * (macOS, Linux and Windows)<br>
+ * (macOS, Linux, FreeBSD and Windows)<br>
  * Call <code>getInstance()</code> to get an OS specific instance.
  */
 public interface IOperatingSystemRegistration {
@@ -35,7 +35,9 @@ public interface IOperatingSystemRegistration {
 		if (Platform.OS_MACOSX.equals(Platform.getOS())) {
 			return new RegistrationMacOsX();
 		} else if (Platform.OS_LINUX.equals(Platform.getOS())) {
-			return new RegistrationLinux();
+			return new RegistrationUnix();
+		} else if (Platform.OS_FREEBSD.equals(Platform.getOS())) {
+			return new RegistrationUnix();
 		} else if (Platform.OS_WIN32.equals(Platform.getOS())) {
 			return new RegistrationWindows();
 		}

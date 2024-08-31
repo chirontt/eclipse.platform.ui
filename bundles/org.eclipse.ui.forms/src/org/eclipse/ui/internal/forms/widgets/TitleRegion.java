@@ -212,6 +212,9 @@ public class TitleRegion extends Canvas {
 					if (Constants.OS_LINUX.equalsIgnoreCase(os)) {
 						tw += 1; // See Bug 342610
 					}
+					else if (Constants.OS_FREEBSD.equalsIgnoreCase(os)) {
+						tw += 1; // See Bug 342610
+					}
 					if (bsize != null)
 						tw -= bsize.x + SPACING;
 					if (msize != null)
